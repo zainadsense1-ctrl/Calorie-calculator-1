@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "VitalAge — Senior Health Calculators"
+version = "1.0.0"
+id = "artifacts/vitalage"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 25072
+
+[services.development]
+run = "pnpm --filter @workspace/vitalage run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/vitalage", "run", "build" ]
+publicDir = "artifacts/vitalage/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "25072"
+BASE_PATH = "/"
